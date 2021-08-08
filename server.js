@@ -32,7 +32,7 @@ app.get("/api/whoami", (req, res) => {
   console.log(req.socket.remoteAddress);
   console.log(req.headers);
   const result = {
-    "ipaddress": req.socket.remoteAddress,
+    "ipaddress": req.headers['x-forwarded-for'] | req.socket.remoteAddress | null,
     "language": req.headers['accept-language'],
     "software": req.headers['user-agent']
   };
